@@ -3,64 +3,67 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WordList.Forge · Ultimate Wordlist Generator</title>
+  <title>WordList.Forge · Professional Wordlist Generator</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     /* ===== RESET & BASE ===== */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    :root {
+      --bg-primary: #f0f4f8;
+      --bg-secondary: #ffffff;
+      --bg-card: #ffffff;
+      --bg-input: #f7fafc;
+      --bg-hover: #edf2f7;
+      --text-primary: #1a202c;
+      --text-secondary: #4a5568;
+      --text-muted: #a0aec0;
+      --border-color: #e2e8f0;
+      --border-focus: #3182ce;
+      --accent: #2b6cb0;
+      --accent-light: #ebf8ff;
+      --accent-gradient: linear-gradient(135deg, #2b6cb0, #2c5282);
+      --success: #38a169;
+      --danger: #e53e3e;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
+      --shadow-lg: 0 10px 40px rgba(0,0,0,0.10);
+      --radius: 12px;
+      --radius-sm: 8px;
+      --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     body {
-      background: radial-gradient(circle at 20% 30%, #0a0f18, #04070c);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg-primary);
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 1.5rem;
-      position: relative;
-      overflow-x: hidden;
+      color: var(--text-primary);
+      line-height: 1.6;
     }
 
-    /* Animated background particles */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-image: 
-        radial-gradient(2px 2px at 20px 30px, #2cd4b033, transparent),
-        radial-gradient(2px 2px at 40px 70px, #2cd4b022, transparent),
-        radial-gradient(2px 2px at 50px 160px, #2cd4b044, transparent),
-        radial-gradient(2px 2px at 90px 40px, #2cd4b033, transparent),
-        radial-gradient(2px 2px at 130px 80px, #2cd4b022, transparent);
-      background-size: 200px 200px;
-      pointer-events: none;
-      z-index: 0;
-    }
-
+    /* ===== MAIN CONTAINER ===== */
     .forge-card {
-      max-width: 1060px;
+      max-width: 1100px;
       width: 100%;
-      background: rgba(14, 20, 30, 0.94);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-radius: 48px;
-      padding: 2.6rem 2.8rem;
-      box-shadow: 0 30px 60px -12px #000000cc, 0 0 0 1px rgba(0, 255, 200, 0.10);
-      border: 1px solid rgba(0, 255, 200, 0.06);
-      position: relative;
-      z-index: 1;
-      transition: all 0.3s ease;
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border-color);
+      transition: var(--transition);
     }
 
     .forge-card:hover {
-      box-shadow: 0 40px 80px -12px #000000ee, 0 0 0 1px rgba(0, 255, 200, 0.25);
+      box-shadow: var(--shadow-lg), 0 0 0 1px rgba(43, 108, 176, 0.1);
     }
 
     /* ===== HEADER ===== */
@@ -69,157 +72,193 @@
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 0.8rem;
-      margin-bottom: 0.3rem;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--border-color);
     }
 
     .logo-area {
       display: flex;
       align-items: center;
-      gap: 0.8rem;
+      gap: 0.75rem;
     }
 
     .logo-icon {
-      width: 60px;
-      height: 60px;
-      background: linear-gradient(135deg, #2cd4b0, #1a9d82);
-      border-radius: 16px;
+      width: 48px;
+      height: 48px;
+      background: var(--accent-gradient);
+      border-radius: var(--radius-sm);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2rem;
-      color: #0a0f18;
-      box-shadow: 0 0 40px #2cd4b055;
+      font-size: 1.5rem;
+      color: white;
       flex-shrink: 0;
-      animation: logoGlow 3s ease-in-out infinite;
+      box-shadow: 0 4px 12px rgba(43, 108, 176, 0.3);
     }
 
-    @keyframes logoGlow {
-      0%, 100% { box-shadow: 0 0 30px #2cd4b033; }
-      50% { box-shadow: 0 0 60px #2cd4b066; }
+    .logo-text {
+      display: flex;
+      flex-direction: column;
     }
 
-    h1 {
-      font-weight: 700;
-      font-size: 2.6rem;
-      letter-spacing: -0.03em;
-      color: #e5f2fa;
-      line-height: 1.1;
+    .logo-text h1 {
+      font-weight: 800;
+      font-size: 1.8rem;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      line-height: 1.2;
     }
 
-    h1 .dot {
-      color: #2cd4b0;
+    .logo-text h1 .dot {
+      color: var(--accent);
+    }
+
+    .logo-text .tagline {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .status-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.3rem 0.9rem;
+      background: var(--accent-light);
+      color: var(--accent);
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border: 1px solid rgba(43, 108, 176, 0.15);
+    }
+
+    .status-badge i {
+      font-size: 0.7rem;
     }
 
     /* ===== SUB-HEADLINE ===== */
     .sub-headline {
-      margin: 0.6rem 0 1.8rem 0;
-      padding: 0.9rem 1.5rem;
-      background: linear-gradient(135deg, rgba(44, 212, 176, 0.10), rgba(44, 212, 176, 0.02));
-      border-left: 4px solid #2cd4b0;
-      border-radius: 0 16px 16px 0;
+      margin: 1rem 0 1.5rem 0;
+      padding: 0.75rem 1.25rem;
+      background: var(--bg-input);
+      border-radius: var(--radius-sm);
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       gap: 0.8rem 2rem;
+      border: 1px solid var(--border-color);
     }
 
     .sub-headline .main-tagline {
-      font-size: 1.15rem;
+      font-size: 0.95rem;
       font-weight: 500;
-      color: #d4e8f5;
+      color: var(--text-secondary);
       display: flex;
       align-items: center;
-      gap: 0.6rem;
+      gap: 0.5rem;
     }
 
     .sub-headline .main-tagline i {
-      color: #2cd4b0;
-      font-size: 1.2rem;
+      color: var(--accent);
     }
 
     .sub-headline .main-tagline strong {
-      color: #2cd4b0;
+      color: var(--text-primary);
       font-weight: 700;
     }
 
     .speed-badge {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      background: rgba(44, 212, 176, 0.10);
-      padding: 0.3rem 1.2rem;
-      border-radius: 60px;
-      color: #8ff0db;
-      font-size: 0.85rem;
+      gap: 0.4rem;
+      padding: 0.2rem 0.9rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
       font-weight: 500;
-      border: 1px solid rgba(44, 212, 176, 0.15);
+      color: var(--text-secondary);
+      background: white;
+      border: 1px solid var(--border-color);
     }
 
     .speed-badge i {
-      color: #ffd93d;
-      animation: pulse 1.5s ease-in-out infinite;
+      color: var(--accent);
     }
 
-    .speed-badge.gold {
-      background: rgba(255, 217, 61, 0.08);
-      border-color: rgba(255, 217, 61, 0.20);
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.6; transform: scale(1.15); }
+    .speed-badge.gold i {
+      color: #d69e2e;
     }
 
     /* ===== FORM ===== */
     .grid-2col {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 1rem 1.8rem;
-      margin-bottom: 1.6rem;
+      gap: 1rem 1.5rem;
+      margin-bottom: 1.5rem;
     }
 
     .input-group {
       display: flex;
       flex-direction: column;
-      gap: 0.25rem;
+      gap: 0.3rem;
     }
 
     .input-group label {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.4rem;
       font-size: 0.8rem;
-      font-weight: 500;
-      color: #c2d4e8;
+      font-weight: 600;
+      color: var(--text-secondary);
       letter-spacing: 0.01em;
     }
 
     .input-group label i {
-      color: #2cd4b0;
-      width: 1.2rem;
+      color: var(--accent);
+      width: 1rem;
+      font-size: 0.75rem;
     }
 
     .input-group input {
-      background: #171f2e;
-      border: 1px solid #29364b;
-      border-radius: 60px;
-      padding: 0.7rem 1.2rem;
-      font-size: 0.95rem;
-      color: #eaf3fc;
-      transition: 0.2s;
+      background: var(--bg-input);
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 0.6rem 1rem;
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      transition: var(--transition);
       outline: none;
       width: 100%;
+      font-family: 'Inter', sans-serif;
     }
 
     .input-group input:focus {
-      border-color: #2cd4b0;
-      box-shadow: 0 0 0 3px #2cd4b033;
-      background: #1a2438;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(43, 108, 176, 0.12);
+      background: white;
     }
 
     .input-group input::placeholder {
-      color: #4a627e;
+      color: var(--text-muted);
+    }
+
+    .input-group input[type="number"] {
+      -moz-appearance: textfield;
+    }
+
+    .input-group input[type="number"]::-webkit-outer-spin-button,
+    .input-group input[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
     }
 
     .full-width {
@@ -227,150 +266,191 @@
     }
 
     /* ===== MUTATION RULES ===== */
-    .section-title {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: #7993b3;
-      margin: 0.2rem 0 0.5rem 0;
+    .mutation-section {
+      margin: 1.5rem 0 1rem 0;
+    }
+
+    .section-header {
       display: flex;
       align-items: center;
-      gap: 0.6rem;
-      border-bottom: 1px dashed #1f2a3b;
-      padding-bottom: 0.25rem;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .section-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
     .section-title i {
-      color: #2cd4b0;
+      color: var(--accent);
+    }
+
+    .section-hint {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .section-hint i {
+      color: var(--success);
+      margin-right: 0.2rem;
     }
 
     .checkbox-grid {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.3rem 1.4rem;
-      background: #0f1825;
-      padding: 0.6rem 1.4rem;
-      border-radius: 60px;
-      border: 1px solid #1f2c3e;
-      margin: 0.1rem 0 0.2rem 0;
+      gap: 0.4rem 1.2rem;
+      padding: 0.6rem 1rem;
+      background: var(--bg-input);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
     }
 
     .checkbox-item {
       display: flex;
       align-items: center;
       gap: 0.4rem;
-      color: #c4d6ec;
-      font-size: 0.82rem;
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+      font-weight: 500;
       cursor: pointer;
-      transition: 0.2s;
+      transition: var(--transition);
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
     }
 
     .checkbox-item:hover {
-      color: #e5f2fa;
+      color: var(--text-primary);
+      background: var(--bg-hover);
     }
 
     .checkbox-item input[type="checkbox"] {
-      accent-color: #2cd4b0;
-      width: 1rem;
-      height: 1rem;
+      width: 0.9rem;
+      height: 0.9rem;
+      accent-color: var(--accent);
       cursor: pointer;
-      filter: drop-shadow(0 0 3px #2cd4b066);
+      flex-shrink: 0;
     }
 
-    /* ===== BUTTONS ===== */
+    .checkbox-item i {
+      color: var(--text-muted);
+      font-size: 0.7rem;
+    }
+
+    /* ===== ACTION BAR ===== */
     .action-bar {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
       gap: 0.8rem;
-      margin: 1.6rem 0 1rem 0;
+      margin: 1.5rem 0 1.2rem 0;
+      padding: 0.75rem 0;
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
     }
 
     .btn-group {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.6rem;
+      gap: 0.5rem;
     }
 
     .btn {
-      background: #1f2b3c;
-      border: none;
-      border-radius: 60px;
-      padding: 0.75rem 1.8rem;
+      background: white;
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 0.5rem 1.2rem;
       font-weight: 600;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       display: inline-flex;
       align-items: center;
-      gap: 0.6rem;
-      color: #d7e5f5;
+      gap: 0.5rem;
+      color: var(--text-secondary);
       cursor: pointer;
-      transition: 0.25s;
-      border: 1px solid #35455e;
-      box-shadow: 0 6px 12px -6px #00000080;
+      transition: var(--transition);
+      font-family: 'Inter', sans-serif;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn:hover {
+      background: var(--bg-hover);
+      border-color: #cbd5e0;
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn:active {
+      transform: translateY(0);
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, #1a3d3a, #0f2a28);
-      border-color: #2cd4b0;
-      color: #d3fcf0;
-      box-shadow: 0 0 30px -8px #2cd4b055;
-    }
-
-    .btn-primary i {
-      color: #2cd4b0;
+      background: var(--accent-gradient);
+      border-color: var(--accent);
+      color: white;
+      box-shadow: 0 4px 12px rgba(43, 108, 176, 0.25);
     }
 
     .btn-primary:hover {
-      background: linear-gradient(135deg, #1f4d48, #153633);
-      border-color: #44eac4;
-      transform: scale(1.02);
-      box-shadow: 0 0 50px -4px #2cd4b088;
+      background: linear-gradient(135deg, #2c5282, #1a365d);
+      border-color: #2c5282;
+      color: white;
+      box-shadow: 0 6px 20px rgba(43, 108, 176, 0.35);
     }
 
-    .btn-primary:active {
-      transform: scale(0.98);
-    }
-
-    .btn-secondary {
-      background: #18212f;
-      border-color: #3e5068;
-    }
-
-    .btn-secondary:hover {
-      background: #223141;
-      border-color: #5b7290;
-    }
-
-    .btn-danger {
-      background: #3b242b;
-      border-color: #b34a5a;
-      color: #f5d4d4;
-    }
-
-    .btn-danger:hover {
-      background: #4f2e36;
-      border-color: #d45a6e;
+    .btn-primary i {
+      color: white;
     }
 
     .btn-success {
-      background: #1a3d2a;
-      border-color: #2cd4b0;
-      color: #d3fcf0;
+      background: var(--success);
+      border-color: var(--success);
+      color: white;
     }
 
     .btn-success:hover {
-      background: #1f4d35;
-      border-color: #44eac4;
+      background: #2f855a;
+      border-color: #2f855a;
+      color: white;
+    }
+
+    .btn-danger {
+      background: white;
+      border-color: #fed7d7;
+      color: var(--danger);
+    }
+
+    .btn-danger:hover {
+      background: #fff5f5;
+      border-color: #feb2b2;
+    }
+
+    .btn-secondary {
+      background: white;
+      border-color: var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg-hover);
+      border-color: #cbd5e0;
     }
 
     .word-count-badge {
-      background: #0e1a24;
-      padding: 0.4rem 1.4rem;
-      border-radius: 60px;
+      background: var(--bg-input);
+      padding: 0.3rem 1.2rem;
+      border-radius: 20px;
       font-size: 0.8rem;
-      color: #9bc0d9;
-      border: 1px solid #2a3f52;
+      color: var(--text-secondary);
+      border: 1px solid var(--border-color);
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
@@ -378,17 +458,17 @@
     }
 
     .word-count-badge .number {
-      color: #2cd4b0;
+      color: var(--accent);
       font-weight: 700;
       font-size: 1rem;
     }
 
     /* ===== OUTPUT ===== */
     .output-area {
-      background: #080e19;
-      border-radius: 24px;
-      border: 1px solid #1f2c3d;
-      margin-top: 0.2rem;
+      background: var(--bg-input);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+      overflow: hidden;
     }
 
     .output-header {
@@ -396,198 +476,105 @@
       justify-content: space-between;
       align-items: center;
       padding: 0.5rem 1.2rem;
-      background: #0d1624;
-      border-radius: 24px 24px 0 0;
-      border-bottom: 1px solid #1a2638;
-      color: #adc6df;
+      background: white;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-secondary);
       font-size: 0.8rem;
+      font-weight: 500;
       flex-wrap: wrap;
       gap: 0.5rem;
     }
 
     .output-header span i {
-      margin-right: 0.5rem;
-      color: #2cd4b0;
+      margin-right: 0.4rem;
+      color: var(--accent);
+    }
+
+    .output-header .entry-count {
+      color: var(--accent);
+      font-weight: 700;
     }
 
     .output-body {
-      max-height: 400px;
+      max-height: 420px;
       overflow-y: auto;
       padding: 0.8rem 1.2rem;
-      background: #060b15;
-      border-radius: 0 0 24px 24px;
+      background: #fafcff;
       font-family: 'JetBrains Mono', 'Fira Code', monospace;
       font-size: 0.7rem;
-      line-height: 1.7;
-      color: #c5def5;
+      line-height: 1.8;
+      color: var(--text-primary);
       white-space: pre-wrap;
       word-break: break-all;
     }
 
     .output-body::-webkit-scrollbar {
-      width: 5px;
+      width: 6px;
     }
 
     .output-body::-webkit-scrollbar-thumb {
-      background: #2cd4b066;
+      background: #cbd5e0;
       border-radius: 12px;
     }
 
     .output-body::-webkit-scrollbar-track {
-      background: #0d1725;
+      background: transparent;
       border-radius: 12px;
     }
 
     .output-body .placeholder {
-      color: #2f4b66;
+      color: var(--text-muted);
       font-style: italic;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
     }
 
     /* ===== FOOTER ===== */
     .footer {
-      margin-top: 1.2rem;
+      margin-top: 1.5rem;
       padding-top: 1rem;
-      border-top: 1px solid #182231;
+      border-top: 1px solid var(--border-color);
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 0.8rem;
       font-size: 0.7rem;
-      color: #3e566c;
+      color: var(--text-muted);
     }
 
     .footer span i {
-      color: #2cd4b0;
+      color: var(--accent);
       opacity: 0.6;
       margin-right: 0.3rem;
     }
 
     .footer .brand {
-      color: #2cd4b0;
-      font-weight: 600;
+      color: var(--accent);
+      font-weight: 700;
     }
 
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 768px) {
-      .forge-card {
-        padding: 1.6rem 1.2rem;
-        border-radius: 32px;
-      }
-
-      .grid-2col {
-        grid-template-columns: 1fr;
-        gap: 0.8rem;
-      }
-
-      .checkbox-grid {
-        border-radius: 32px;
-        padding: 0.6rem 1rem;
-        gap: 0.3rem 0.8rem;
-      }
-
-      .action-bar {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .btn-group {
-        justify-content: center;
-      }
-
-      .btn {
-        justify-content: center;
-        padding: 0.7rem 1.2rem;
-        font-size: 0.8rem;
-      }
-
-      h1 {
-        font-size: 1.8rem;
-      }
-
-      .logo-icon {
-        width: 44px;
-        height: 44px;
-        font-size: 1.4rem;
-      }
-
-      .sub-headline {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 0.6rem 1rem;
-      }
-
-      .sub-headline .main-tagline {
-        font-size: 0.95rem;
-      }
-
-      .word-count-badge {
-        justify-content: center;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .forge-card {
-        padding: 1.2rem 0.8rem;
-        border-radius: 24px;
-      }
-
-      h1 {
-        font-size: 1.4rem;
-      }
-
-      .logo-icon {
-        width: 36px;
-        height: 36px;
-        font-size: 1.1rem;
-        border-radius: 12px;
-      }
-
-      .sub-headline .main-tagline {
-        font-size: 0.85rem;
-      }
-
-      .speed-badge {
-        font-size: 0.75rem;
-        padding: 0.2rem 0.8rem;
-      }
-
-      .btn {
-        font-size: 0.75rem;
-        padding: 0.6rem 1rem;
-      }
-    }
-
-    /* ===== ANIMATED GLOW ===== */
-    @keyframes glow {
-      0%, 100% { box-shadow: 0 0 30px -8px #2cd4b033; }
-      50% { box-shadow: 0 0 60px -4px #2cd4b066; }
-    }
-
-    .forge-card {
-      animation: glow 5s ease-in-out infinite;
-    }
-
-    /* Toast notification */
+    /* ===== TOAST ===== */
     .toast {
       position: fixed;
       bottom: 2rem;
       right: 2rem;
-      background: #1a3d3a;
-      border: 1px solid #2cd4b0;
-      padding: 1rem 1.8rem;
-      border-radius: 16px;
-      color: #d3fcf0;
-      font-size: 0.9rem;
+      background: white;
+      border: 1px solid var(--border-color);
+      padding: 0.8rem 1.5rem;
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      font-size: 0.85rem;
       font-weight: 500;
-      box-shadow: 0 15px 40px #000000ee;
+      box-shadow: var(--shadow-lg);
       transform: translateY(120px);
       opacity: 0;
       transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
       z-index: 1000;
       display: flex;
       align-items: center;
-      gap: 0.8rem;
+      gap: 0.6rem;
       max-width: 90vw;
+      border-left: 4px solid var(--accent);
     }
 
     .toast.show {
@@ -596,19 +583,19 @@
     }
 
     .toast i {
-      color: #2cd4b0;
-      font-size: 1.3rem;
+      color: var(--accent);
+      font-size: 1.1rem;
     }
 
-    /* Loading spinner */
+    /* ===== SPINNER ===== */
     .spinner {
       display: none;
-      width: 18px;
-      height: 18px;
-      border: 2px solid #2cd4b033;
-      border-top: 2px solid #2cd4b0;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top: 2px solid white;
       border-radius: 50%;
-      animation: spin 0.8s linear infinite;
+      animation: spin 0.7s linear infinite;
     }
 
     @keyframes spin {
@@ -622,6 +609,135 @@
 
     .btn.loading .btn-text {
       display: none;
+    }
+
+    .btn.loading i {
+      display: none;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .forge-card {
+        padding: 1.8rem 1.5rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .forge-card {
+        padding: 1.5rem 1.2rem;
+        border-radius: var(--radius-sm);
+      }
+
+      .grid-2col {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+      }
+
+      .checkbox-grid {
+        gap: 0.3rem 0.8rem;
+        padding: 0.5rem 0.8rem;
+      }
+
+      .action-bar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .btn-group {
+        justify-content: center;
+      }
+
+      .btn {
+        justify-content: center;
+        padding: 0.5rem 1rem;
+        font-size: 0.75rem;
+        flex: 1;
+        min-width: 80px;
+      }
+
+      .logo-text h1 {
+        font-size: 1.4rem;
+      }
+
+      .logo-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+      }
+
+      .sub-headline {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0.6rem 1rem;
+      }
+
+      .sub-headline .main-tagline {
+        font-size: 0.85rem;
+      }
+
+      .word-count-badge {
+        justify-content: center;
+        width: 100%;
+      }
+
+      .header-actions {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .toast {
+        bottom: 1rem;
+        right: 1rem;
+        left: 1rem;
+        max-width: none;
+        font-size: 0.8rem;
+        padding: 0.7rem 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .forge-card {
+        padding: 1rem 0.8rem;
+      }
+
+      .logo-text h1 {
+        font-size: 1.2rem;
+      }
+
+      .logo-icon {
+        width: 34px;
+        height: 34px;
+        font-size: 1rem;
+      }
+
+      .btn {
+        font-size: 0.7rem;
+        padding: 0.4rem 0.8rem;
+        min-width: 60px;
+      }
+
+      .checkbox-item {
+        font-size: 0.7rem;
+      }
+
+      .output-body {
+        font-size: 0.6rem;
+        padding: 0.5rem 0.8rem;
+        max-height: 300px;
+      }
+    }
+
+    /* ===== SELECTION ===== */
+    ::selection {
+      background: var(--accent);
+      color: white;
+    }
+
+    /* ===== FOCUS VISIBLE ===== */
+    .btn:focus-visible,
+    input:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
     }
   </style>
 </head>
@@ -642,70 +758,81 @@
         <div class="logo-icon">
           <i class="fas fa-hammer"></i>
         </div>
-        <h1>
-          wordlist<span class="dot">.</span>forge
-        </h1>
+        <div class="logo-text">
+          <h1>wordlist<span class="dot">.</span>forge</h1>
+          <span class="tagline">Professional Wordlist Generator</span>
+        </div>
+      </div>
+      <div class="header-actions">
+        <span class="status-badge">
+          <i class="fas fa-circle" style="color: var(--success);"></i>
+          Ready
+        </span>
       </div>
     </div>
 
     <!-- ===== SUB-HEADLINE ===== -->
     <div class="sub-headline">
       <div class="main-tagline">
-        <i class="fas fa-arrow-right"></i>
+        <i class="fas fa-bolt"></i>
         <span>Forge <strong>massive</strong> wordlists in <strong>seconds</strong></span>
       </div>
       <div class="speed-badge">
-        <i class="fas fa-bolt"></i>
-        <span>Lightning fast generation</span>
+        <i class="fas fa-tachometer-alt"></i>
+        <span>Lightning fast</span>
       </div>
       <div class="speed-badge gold">
         <i class="fas fa-rocket"></i>
-        <span>Generate in &lt; 100ms</span>
+        <span>&lt; 100ms generation</span>
       </div>
     </div>
 
     <!-- ===== FORM ===== -->
     <div class="grid-2col">
       <div class="input-group">
-        <label><i class="fas fa-user"></i> Full name</label>
+        <label><i class="fas fa-user"></i> Full Name</label>
         <input type="text" id="fullName" placeholder="e.g. Alex Rivera" value="Alex Rivera">
       </div>
       <div class="input-group">
-        <label><i class="fas fa-id-badge"></i> Nickname / alias</label>
+        <label><i class="fas fa-id-badge"></i> Nickname / Alias</label>
         <input type="text" id="nickname" placeholder="e.g. r3v" value="r3v">
       </div>
       <div class="input-group">
-        <label><i class="fas fa-calendar-alt"></i> Birth year</label>
+        <label><i class="fas fa-calendar-alt"></i> Birth Year</label>
         <input type="number" id="birthYear" placeholder="1990" value="1990" min="1900" max="2030">
       </div>
       <div class="input-group">
-        <label><i class="fas fa-venus-mars"></i> Pet / partner name</label>
+        <label><i class="fas fa-paw"></i> Pet / Partner Name</label>
         <input type="text" id="petPartner" placeholder="e.g. Luna" value="Luna">
       </div>
       <div class="input-group full-width">
-        <label><i class="fas fa-building"></i> Company / team</label>
+        <label><i class="fas fa-building"></i> Company / Team</label>
         <input type="text" id="company" placeholder="e.g. CyberNova" value="CyberNova">
       </div>
     </div>
 
     <!-- ===== MUTATION RULES ===== -->
-    <div class="section-title">
-      <i class="fas fa-code-branch"></i> mutation engines
-      <span style="font-weight: 400; color: #4a6a85; font-size: 0.7rem; margin-left: auto;">
-        <i class="fas fa-check-circle" style="color: #2cd4b0;"></i> all enabled = maximum output
-      </span>
-    </div>
-    <div class="checkbox-grid">
-      <label class="checkbox-item"><input type="checkbox" id="chkLeet" checked> <i class="fas fa-robot"></i> leet</label>
-      <label class="checkbox-item"><input type="checkbox" id="chkReverse" checked> <i class="fas fa-arrow-rotate-left"></i> reverse</label>
-      <label class="checkbox-item"><input type="checkbox" id="chkCapitalize" checked> <i class="fas fa-font"></i> capitalize</label>
-      <label class="checkbox-item"><input type="checkbox" id="chkAppendYear" checked> <i class="fas fa-plus"></i> +year</label>
-      <label class="checkbox-item"><input type="checkbox" id="chkPrependNick" checked> <i class="fas fa-at"></i> nick+name</label>
-      <label class="checkbox-item"><input type="checkbox" id="chkPetCombo" checked> <i class="fas fa-paw"></i> pet+name</label>
-      <label class="checkbox-item"><input type="checkbox" id="chkCompanyCombo" checked> <i class="fas fa-briefcase"></i> company+name</label>
-      <label class="checkbox-item"><input type="checkbox" id="chkYearPrefix" checked> <i class="fas fa-calendar-plus"></i> year+name</label>
-      <label class="checkbox-item"><input type="checkbox" id="chkAllCombos" checked> <i class="fas fa-cubes"></i> all combos</label>
-      <label class="checkbox-item"><input type="checkbox" id="chkTripleCombos" checked> <i class="fas fa-cube"></i> triple combos</label>
+    <div class="mutation-section">
+      <div class="section-header">
+        <div class="section-title">
+          <i class="fas fa-code-branch"></i> Mutation Engines
+        </div>
+        <div class="section-hint">
+          <i class="fas fa-check-circle"></i> All enabled = maximum output
+        </div>
+      </div>
+      <div class="checkbox-grid">
+        <label class="checkbox-item"><input type="checkbox" id="chkLeet" checked> <i class="fas fa-robot"></i> Leet</label>
+        <label class="checkbox-item"><input type="checkbox" id="chkReverse" checked> <i class="fas fa-arrow-rotate-left"></i> Reverse</label>
+        <label class="checkbox-item"><input type="checkbox" id="chkCapitalize" checked> <i class="fas fa-font"></i> Capitalize</label>
+        <label class="checkbox-item"><input type="checkbox" id="chkAppendYear" checked> <i class="fas fa-plus-circle"></i> +Year</label>
+        <label class="checkbox-item"><input type="checkbox" id="chkPrependNick" checked> <i class="fas fa-at"></i> Nick+Name</label>
+        <label class="checkbox-item"><input type="checkbox" id="chkPetCombo" checked> <i class="fas fa-paw"></i> Pet+Name</label>
+        <label class="checkbox-item"><input type="checkbox" id="chkCompanyCombo" checked> <i class="fas fa-briefcase"></i> Company+Name</label>
+        <label class="checkbox-item"><input type="checkbox" id="chkYearPrefix" checked> <i class="fas fa-calendar-plus"></i> Year+Name</label>
+        <label class="checkbox-item"><input type="checkbox" id="chkAllCombos" checked> <i class="fas fa-cubes"></i> All Combos</label>
+        <label class="checkbox-item"><input type="checkbox" id="chkTripleCombos" checked> <i class="fas fa-cube"></i> Triple Combos</label>
+      </div>
     </div>
 
     <!-- ===== ACTION BAR ===== -->
@@ -713,7 +840,7 @@
       <div class="btn-group">
         <button class="btn btn-primary" id="generateBtn">
           <i class="fas fa-bolt"></i>
-          <span class="btn-text">Generate Wordlist</span>
+          <span class="btn-text">Generate</span>
           <span class="spinner"></span>
         </button>
         <button class="btn btn-secondary" id="copyBtn">
@@ -737,24 +864,24 @@
     <!-- ===== OUTPUT ===== -->
     <div class="output-area">
       <div class="output-header">
-        <span><i class="fas fa-terminal"></i> wordlist output</span>
-        <span><i class="fas fa-database"></i> <span id="countDisplay2">0</span> entries</span>
+        <span><i class="fas fa-terminal"></i> Wordlist Output</span>
+        <span><i class="fas fa-database"></i> <span class="entry-count" id="countDisplay2">0</span> entries</span>
       </div>
       <div class="output-body" id="outputBody">
-        <span class="placeholder">// Click "Generate Wordlist" to forge your wordlist</span>
+        <span class="placeholder">// Click "Generate" to forge your wordlist</span>
       </div>
     </div>
 
     <!-- ===== FOOTER ===== -->
     <div class="footer">
       <span>
-        <i class="fas fa-skull"></i> authorised for research &amp; pentesting
+        <i class="fas fa-shield-alt"></i> Authorised for research &amp; pentesting
       </span>
       <span>
-        <i class="fas fa-arrow-rotate-right"></i> 10 mutation layers · massive output
+        <i class="fas fa-layer-group"></i> 10+ mutation layers · massive output
       </span>
       <span>
-        <i class="fas fa-bolt"></i> generated in <strong style="color: #2cd4b0;">microseconds</strong>
+        <i class="fas fa-bolt"></i> Generated in <strong style="color: var(--accent);">microseconds</strong>
       </span>
       <span class="brand">
         <i class="fas fa-hammer"></i> wordlist.forge
@@ -763,7 +890,7 @@
 
   </div>
 
-  <!-- ===== JAVASCRIPT - ULTIMATE EDITION ===== -->
+  <!-- ===== JAVASCRIPT - FULL FUNCTIONALITY PRESERVED ===== -->
   <script>
     (function() {
       'use strict';
@@ -836,7 +963,6 @@
         if (!tok) return;
         result.add(tok);
 
-        // Single mutations
         if (chkLeet.checked) {
           const l = leet(tok);
           if (l !== tok) result.add(l);
@@ -850,7 +976,6 @@
           if (c !== tok) result.add(c);
         }
 
-        // Double mutations
         if (chkLeet.checked && chkReverse.checked) {
           const lr = reverseStr(leet(tok));
           if (lr !== tok) result.add(lr);
@@ -870,7 +995,6 @@
           if (cr !== tok) result.add(cr);
         }
 
-        // Triple mutations
         if (chkLeet.checked && chkReverse.checked && chkCapitalize.checked) {
           const lrc = capitalize(reverseStr(leet(tok)));
           if (lrc !== tok) result.add(lrc);
@@ -933,7 +1057,6 @@
         const { name, nick, year, pet, comp } = getBase();
         const result = new Set();
 
-        // Add primary tokens with all mutations
         applyAllMutations(name, result);
         applyAllMutations(nick, result);
         applyAllMutations(pet, result);
@@ -943,7 +1066,6 @@
           applyAllMutations(year, result);
         }
 
-        // Build combo array
         const baseTokens = [];
         if (name) baseTokens.push(name);
         if (nick) baseTokens.push(nick);
@@ -951,7 +1073,6 @@
         if (comp) baseTokens.push(comp);
         if (year) baseTokens.push(year);
 
-        // Generate all combinations
         if (chkAllCombos.checked && baseTokens.length >= 2) {
           const combos = getAllCombinations(baseTokens, 4);
           for (const combo of combos) {
@@ -959,7 +1080,6 @@
           }
         }
 
-        // Generate triple combinations specifically
         if (chkTripleCombos.checked && baseTokens.length >= 3) {
           const tripleCombos = getAllCombinations(baseTokens, 3);
           for (const combo of tripleCombos) {
@@ -967,7 +1087,6 @@
           }
         }
 
-        // Year-specific combos
         if (chkYearPrefix.checked && year) {
           const tokens = [name, nick, pet, comp].filter(t => t);
           for (const t of tokens) {
@@ -982,7 +1101,6 @@
           }
         }
 
-        // Nick+name combos
         if (chkPrependNick.checked && nick && name) {
           applyAllMutations(nick + name, result);
           applyAllMutations(name + nick, result);
@@ -993,7 +1111,6 @@
           }
         }
 
-        // Pet combos
         if (chkPetCombo.checked && pet) {
           if (name) {
             applyAllMutations(pet + name, result);
@@ -1018,7 +1135,6 @@
           }
         }
 
-        // Company combos
         if (chkCompanyCombo.checked && comp) {
           if (name) {
             applyAllMutations(comp + name, result);
@@ -1039,7 +1155,6 @@
           }
         }
 
-        // Append year
         if (chkAppendYear.checked && year) {
           [name, nick, pet, comp].forEach(t => {
             if (t) {
@@ -1053,8 +1168,6 @@
           if (nick && pet) applyAllMutations(nick + pet + year, result);
         }
 
-        // ---- Generate additional massive combos ----
-        // All 4-way combinations
         if (chkAllCombos.checked) {
           const allTokens = [name, nick, pet, comp, year].filter(t => t);
           if (allTokens.length >= 4) {
@@ -1065,7 +1178,6 @@
           }
         }
 
-        // Generate with separators (underscore, dash, dot)
         const separators = ['_', '-', '.', ''];
         const tokens = [name, nick, pet, comp, year].filter(t => t);
         if (tokens.length >= 2) {
@@ -1081,7 +1193,6 @@
           }
         }
 
-        // Generate with suffixes
         const suffixes = ['123', '456', '789', '2024', '2025', '2026', 'admin', 'root', 'password', '123456', 'qwerty'];
         for (const t of tokens) {
           for (const suffix of suffixes) {
@@ -1090,7 +1201,6 @@
           }
         }
 
-        // Generate with prefixes
         const prefixes = ['admin_', 'root_', 'user_', 'test_', 'demo_', 'sec_', 'cyber_'];
         for (const t of tokens) {
           for (const prefix of prefixes) {
@@ -1098,7 +1208,6 @@
           }
         }
 
-        // Final filter and sort
         const final = Array.from(result).filter(s => s && s.trim().length > 0);
         final.sort((a, b) => a.localeCompare(b));
         return final;
@@ -1108,11 +1217,9 @@
       function render() {
         const start = performance.now();
 
-        // Show loading state
         generateBtn.classList.add('loading');
         generateBtn.disabled = true;
 
-        // Use setTimeout to allow UI to update
         setTimeout(() => {
           try {
             const list = generateWordlist();
@@ -1121,14 +1228,13 @@
             lastGeneratedList = list;
 
             if (list.length === 0) {
-              outputBody.innerHTML = '<span class="placeholder">// no words · add inputs & enable rules</span>';
+              outputBody.innerHTML = '<span class="placeholder">// No words generated · add inputs & enable rules</span>';
               countDisplay.textContent = '0';
               countDisplay2.textContent = '0';
               showToast('⚠️ No words generated');
               return;
             }
 
-            // Show first 1000 words as preview, but store all
             const preview = list.slice(0, 1000);
             outputBody.textContent = preview.join('\n');
             if (list.length > 1000) {
@@ -1154,11 +1260,10 @@
 
       copyBtn.addEventListener('click', function() {
         const text = outputBody.textContent;
-        if (!text || text.includes('// Click') || text.includes('placeholder')) {
+        if (!text || text.includes('// Click') || text.includes('// No words')) {
           showToast('⚠️ Generate a wordlist first');
           return;
         }
-        // Copy full list if available
         const fullText = lastGeneratedList.length > 0 ? lastGeneratedList.join('\n') : text;
         navigator.clipboard.writeText(fullText).then(() => {
           showToast(`📋 Copied ${lastGeneratedList.length.toLocaleString()} words to clipboard!`);
@@ -1196,7 +1301,7 @@
         birthYear.value = '';
         petPartner.value = '';
         company.value = '';
-        outputBody.innerHTML = '<span class="placeholder">// cleared · ready for new wordlist</span>';
+        outputBody.innerHTML = '<span class="placeholder">// Cleared · ready for new wordlist</span>';
         countDisplay.textContent = '0';
         countDisplay2.textContent = '0';
         lastGeneratedList = [];
